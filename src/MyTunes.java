@@ -24,10 +24,18 @@
  *
  */
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import cs1c.MillionSongDataSubset;
 import cs1c.SongEntry;
-import cs1c.TimeConverter;
 
 /**
  * An object of a class stores and manages purchased tunes.
@@ -45,6 +53,9 @@ public class MyTunes
 
    private ArrayList<SongEntry> purchasedTunes;
    private FoothillTunesStore theStore;
+
+   private static final String jsonFilePath = "resources/music_genre_subset.json";
+   private static final boolean ENABLE_DATA_OUTPUT = true;
 
    public MyTunes(FoothillTunesStore store)
    {
@@ -74,174 +85,65 @@ public class MyTunes
       System.out.println("");
    }
 
-   public static void main(String[] args)
-   {
-      final String jsonFilePath = "resources/music_genre_subset.json";
-      final String tunesTestFilePath = "resources/test_tunes.txt";
+   /**
+    * Calls a JSONParse part of the "org.json.simple" package to parse the input file.
+    * Stores each song entry in an array of SongEntry.
+    * Demonstrates measuring elapsed time of an example algorithm.
+    */
+   public static void main(String[] args) {
+      printMenu();
 
-      FoothillTunesStore store = new FoothillTunesStore(jsonFilePath);
-      ArrayList<String> storeTitles = store.getTitles();
+      JSONParser jsonParser = new JSONParser();
 
-      if (storeTitles.isEmpty())
-      {
-         System.out.println("Welcome! Currently there are no songs in the "
-                     + "FoothillTunes store!");
-      } else
-      {
+      try {
 
-         System.out.println("Welcome! We have over " + storeTitles.size()
-               + " in FoothillTunes store!");
-      }
+         // --------------------
+         // parse the JSON file
+         FileReader fileReader = new FileReader(jsonFilePath);
 
-      ArrayList<String> tunesTestFile = MyTunes.readTestFile(tunesTestFilePath);
+         JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
 
-      MyTunes.printMenu();
+         JSONArray allSongs = (JSONArray) jsonObject.get("songs");
 
-      MyTunes personalTunes = new MyTunes(store);
+         System.out.println("Parsing JSON file...");
+         MillionSongDataSubset dataSet = new MillionSongDataSubset(allSongs);
 
-      ArrayList<String> linesInFile = MyTunes.readTestFile(tunesTestFilePath);
-      int selection = -1;
-      long startTime, estimatedTime;
+         // display unsorted array of songs
+         System.out.println("Completed parsing JSON file.");
+         if (ENABLE_DATA_OUTPUT)
+            dataSet.printAllSongs();
+            System.out.println("allSongs size: " + allSongs.size());
 
-      for (int i = 0; i < linesInFile.size() && selection != QUIT; /*
-                                                                    * no need to
-                                                                    * increment
-                                                                    * here
-                                                                    */)
-      {
-         String line = linesInFile.get(i++);
-         String[] tokens = line.split(" ");
-         if (line.contains("selection"))
-            selection = Integer.parseInt(tokens[1]);
-         else
-         {
-            // invalid selection format
-            System.out.println("WARNING: Invalid selection");
-            continue;
-         }
+         // --------------------
+         // use to measure the run time
+   //      long startTime, estimatedTime;
 
-         System.out.println("\nselected option:" + selection);
-         switch (selection)
-         {
-         case QUIT:
-            break;
-         case HELP_MENU:
-            MyTunes.printMenu();
-            break;
-         case LIST_SONG_TITLES:
-            System.out.println("Number of titles in store = "
-                  + personalTunes.getPurchasedTunes().size());
-            personalTunes.showLibrary();
-            break;
-         case LIST_SONGS_BY_GENRE:
-            // capture start time
-            startTime = System.nanoTime();
+  //       System.out.println("Sorting array of " + dataSet.getArrayOfSongs().length + " songs via BubbleSort...");
 
-            // implement grouping songs by genre
-            store.groupSongsByGenre();
+         // measuring run time of an example algorithm
+ //        startTime = System.nanoTime();    
 
-            // stop and calculate elapsed time
-            estimatedTime = System.nanoTime() - startTime;
+         // sort
+ //        SongEntry.setSortType(SongEntry.SORT_BY_DURATION);
+ //        BubbleSort.sortArray(dataSet.getArrayOfSongs());
 
-            // output the result
-            store.printNumOfSongsInEachGenre();
+  //       estimatedTime = System.nanoTime() - startTime;
 
-            // report algorithm time
-            System.out.println("\nAlgorithm Elapsed Time: "
-                  + TimeConverter.convertTimeToString(estimatedTime) + "\n");
-            break;
-         case BUY_SONG_TITLE:
-            String title = linesInFile.get(i++);
-            System.out.println("selected song title: " + title);
+         // display the sorted list
+         if (!ENABLE_DATA_OUTPUT)
+            dataSet.printAllSongs();
 
-            // capture start time
-            startTime = System.nanoTime();
+         // report algorithm time
+  //       System.out.println("\nAlgorithm Elapsed Time: "
+  //             + TimeConverter.convertTimeToString(estimatedTime) + ", "
+  //             + " seconds.\n");
 
-            // implement searching for songs by title
-            ArrayList<SongEntry> searchResult = store.buySongByTitle(title);
-
-            // stop and calculate elapsed time
-            estimatedTime = System.nanoTime() - startTime;
-
-            System.out.println("Found " + searchResult.size() + " two songs:");
-            System.out.println(searchResult);
-
-            personalTunes.addSongs(searchResult);
-
-            // report algorithm time
-            System.out.println("\nAlgorithm Elapsed Time: "
-                  + TimeConverter.convertTimeToString(estimatedTime) + "\n");
-            break;
-
-         case CREATE_PLAYLIST:
-            int numSongsToBuy = Integer.parseInt(linesInFile.get(i++));
-            System.out.println("selected number of songs to buy: "
-                  + numSongsToBuy);
-
-            personalTunes.addSongs(store.getFirstNTitles(numSongsToBuy,
-                  ENABLE_RANDOM_PURCHASE));
-
-            int lengthInMinutes = Integer.parseInt(linesInFile.get(i++));
-            int seconds = lengthInMinutes * 60;
-            System.out.println("selected playlist length (in seconds): "
-                  + seconds);
-
-            // capture start time
-            startTime = System.nanoTime();
-
-            // implement finding subset of songs that is closest to the
-            // requested length of play list
-            // HINT: Use same approach as buying a subset of groceries within
-            // budget
-            ArrayList<SongEntry> myPlayList = personalTunes
-                  .makePlayList(seconds);
-
-            // stop and calculate elapsed time
-            estimatedTime = System.nanoTime() - startTime;
-
-            // output the result
-            int totalTime = 0;
-            for (SongEntry song : myPlayList)
-            {
-               totalTime += song.getDuration();
-            }
-            System.out
-                  .println("length of play list (in seconds): " + totalTime);
-            System.out.println("songs in play list: " + myPlayList);
-
-            // report algorithm time
-            System.out.println("\nAlgorithm Elapsed Time: "
-                  + TimeConverter.convertTimeToString(estimatedTime) + "\n");
-            break;
-         default:
-            System.out.println("ERROR : invalid selection.");
-            MyTunes.printMenu();
-            break;
-         } // switch
-      }
-   }
-
-   private ArrayList<SongEntry> getPurchasedTunes()
-   {
-      // TODO Auto-generated method stub
-      return null;
-   }
-
-   private ArrayList<SongEntry> makePlayList(int seconds)
-   {
-      // TODO Auto-generated method stub
-      return null;
-   }
-
-   private void addSongs(Object firstNTitles)
-   {
-      // TODO Auto-generated method stub
-
-   }
-
-   private static ArrayList<String> readTestFile(String tunesTestFilePath)
-   {
-      // TODO Auto-generated method stub
-      return null;
+      } 
+      catch (FileNotFoundException e) 
+      {  e.printStackTrace(); } 
+      catch (IOException e) 
+      {  e.printStackTrace(); } 
+      catch (ParseException e) 
+      {  e.printStackTrace(); }
    }
 }
