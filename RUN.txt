@@ -1,0 +1,33 @@
+Part 1:
+-----------------------------------
+Groceries wanted:
+[3, 4, 6, 2, 15, 7, 5, 1, 11]
+Enter how much cash you have:
+13
+Purchased grocery prices are:
+[ 3, 4, 6, ] sum = 13
+
+Algorithm Elapsed Time: 0 hrs : 0 mins : 0 sec : 0 ms : 536147 ns : ,  seconds.
+------------------------------------
+
+Groceries wanted:
+[3, 4, 6, 2, 15, 7, 5, 1, 11]
+Enter how much cash you have:
+25
+Purchased grocery prices are:
+[ 4, 6, 15, ] sum = 25
+
+Algorithm Elapsed Time: 0 hrs : 0 mins : 0 sec : 0 ms : 564818 ns : ,  seconds.
+-------------------------------------
+Groceries wanted:
+[3, 4, 6, 2, 15, 7, 5, 1, 11]
+Enter how much cash you have:
+56
+Purchased grocery prices are:
+[ 3, 4, 6, 2, 15, 7, 5, 1, 11, ] sum = 54
+
+Algorithm Elapsed Time: 0 hrs : 0 mins : 0 sec : 3 ms : 994638 ns : ,  seconds.
+------------------------------------
+
+
+

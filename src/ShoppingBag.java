@@ -92,6 +92,8 @@ public class ShoppingBag
       int maxSize = 0;
       Col = new ArrayList<>();
       ArrayList<Integer> emptySet = new ArrayList<>();
+      ArrayList<Integer> maxSubSet = null;
+    
       Col.add(emptySet);
       for (Integer item : groceryList)
       {
@@ -108,6 +110,7 @@ public class ShoppingBag
                {
                   if (newSubSetSize > maxSize)
                      maxSize = newSubSetSize;
+                     maxSubSet = newSubSet;
                   Col.add(newSubSet);
                }
                if (newSubSetSize == budget)
@@ -118,7 +121,11 @@ public class ShoppingBag
                }
             }
          }
+        
       }
+      if (foundSubSet == false)
+      printSubSet(maxSubSet);
+      
    }
 
    public Integer listSummation(ArrayList<Integer> listToSum)
