@@ -1,65 +1,120 @@
-/**
- * Reads an input file that contains the prices (whole numbers) of the different items.
- * Then stores and outputs a list of items we can buy
- * given the condition of how much money you have in your wallet.
- * We're at a cash only store. So, no checks or credit purchases!
- *
- * @author Foothill College, [YOUR NAME HERE]
- *
- * REMINDER: Include text cases in addition to those provided.
- *
- */
-
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import cs1c.BubbleSort;
-import cs1c.TimeConverter;
 
-public class ShoppingBag 
+public class ShoppingBag
 {
-	private ArrayList<Integer> priceOfGroceries;
-	
-	public static void main(String[] args) 
-	{
-		final String FILENAME = "resources/groceries.txt";	 // Directory path for Mac OS X
-		//final String FILENAME = "resources\groceries.txt"; // Directory path for Windows OS (i.e. Operating System)
+   Boolean foundSubSet = false;
+   String FILENAME;
+   int cashOnHand;
+   ArrayList<Integer> groceryList;
+   ArrayList<ArrayList<Integer>> Col;
 
-		ShoppingBag bag = new ShoppingBag(FILENAME);
-		ArrayList<Integer> shoppingList = bag.getPriceOfGroceries();
-		System.out.println("Groceries wanted:");
-		System.out.println(shoppingList);
-		
-		
-		System.out.println("Enter how much cash you have:");
-		Scanner keyboard = new Scanner(System.in);
-		int budget = Integer.parseInt(keyboard.next());
-		
-		long startTime, estimatedTime;
-		
-		// capture start time
-		/* COMPLETE */
+   public ShoppingBag(String fILENAME)
+   {
+      super();
+      FILENAME = fILENAME;
+   }
 
-		
-		// implement finding subset of groceries that is closest to meeting budget
-		// NOTE: In this part, you only need to keep track of the price of each item,
-		// 		 and not the name of the item you are buying.
-		ArrayList<Integer> purchases = bag.findSubset(budget);
-		
-		
-		// stop and calculate elapsed time
-		/* COMPLETE */
+   public ArrayList<Integer> getPriceOfGroceries() throws FileNotFoundException
+   {
 
-		// output the result
-		System.out.println("Purchased grocery prices are:");
-		System.out.println(purchases);
-		
-		
-		// report algorithm time
-		/* COMPLETE */
-	}
+      String filename = this.FILENAME;
+      BufferedReader inFile = new BufferedReader(new FileReader(filename));
+
+      // Define and initialize the ArrayList
+      groceryList = new ArrayList<>(); // The ArrayList stores strings
+
+      String inline; // Buffer to store the current line
+      try
+      {
+         while ((inline = inFile.readLine()) != null) // Read line-by-line,
+                                                      // until end of file
+         {
+            Pattern intsOnly = Pattern
+                  .compile("([\\+-]?\\d+)([eE][\\+-]?\\d+)?");
+            Matcher makeMatch = intsOnly.matcher(inline);
+            makeMatch.find();
+            String str = makeMatch.group();
+            Integer i = Integer.parseInt(str);
+            groceryList.add(i);
+         }
+         inFile.close(); // We've finished reading the file
+      } catch (IOException e)
+      {
+         e.printStackTrace();
+      }
+      return groceryList;
+   }
+
+   public void findSubset(int budget)
+   {
+      int maxSize = 0;
+      Col = new ArrayList<>();
+      ArrayList<Integer> emptySet = new ArrayList<>();
+      Col.add(emptySet);
+      for (Integer item : groceryList)
+      {
+         if (foundSubSet == false)
+         {
+            int size = Col.size();
+            for (int i = 0; i < size; i++)
+            {
+               ArrayList<Integer> newSubSet = (ArrayList<Integer>) Col.get(i)
+                     .clone();
+               newSubSet.add(item);
+               int newSubSetSize = listSummation(newSubSet);
+               if (newSubSetSize < budget)
+               {
+                  if (newSubSetSize > maxSize)
+                     maxSize = newSubSetSize;
+                  Col.add(newSubSet);
+               }
+               if (newSubSetSize == budget)
+               {
+                  foundSubSet = true;
+                  printSubSet(newSubSet);
+                  break;
+               }
+            }
+         }
+      }
+   }
+
+   public Integer listSummation(ArrayList<Integer> listToSum)
+   {
+      Integer sum = 0;
+      for (Integer i : listToSum)
+      {
+         sum = sum + i;
+      }
+      return sum;
+   }
+
+   public void printSubSet(ArrayList<Integer> subSet)
+   {
+      System.out.print("[ ");
+      for (Integer a : subSet)
+      {
+         System.out.print(+a + ", ");
+      }
+      System.out.println("] sum = " + listSummation(subSet));
+   }
+
+   public void printCol(ArrayList<ArrayList<Integer>> Col)
+   {
+      for (ArrayList<Integer> I : Col)
+      {
+         System.out.print("[ ");
+         printSubSet(I);
+         System.out.print(" ]");
+         System.out.println();
+      }
+   }
 
 }
