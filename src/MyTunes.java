@@ -24,20 +24,8 @@
   *
   */
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
-
-import cs1c.BubbleSort;
-import cs1c.MillionSongDataSubset;
 import cs1c.SongEntry;
 import cs1c.TimeConverter;
 
@@ -58,7 +46,12 @@ public class MyTunes
 	private ArrayList<SongEntry> purchasedTunes;
 	private FoothillTunesStore theStore;
 
-    /**
+    public MyTunes(FoothillTunesStore store)
+   {
+      // TODO Auto-generated constructor stub
+   }
+
+   /**
      * Shows the titles of purchased tunes.
      */
 	public void showLibrary()
@@ -205,5 +198,29 @@ public class MyTunes
 			} // switch
 		}
 	}
+
+   private ArrayList<SongEntry> getPurchasedTunes()
+   {
+      // TODO Auto-generated method stub
+      return null;
+   }
+
+   private ArrayList<SongEntry> makePlayList(int seconds)
+   {
+      // TODO Auto-generated method stub
+      return null;
+   }
+
+   private void addSongs(Object firstNTitles)
+   {
+      // TODO Auto-generated method stub
+      
+   }
+
+   private static ArrayList<String> readTestFile(String tunesTestFilePath)
+   {
+      // TODO Auto-generated method stub
+      return null;
+   }
 }
 
