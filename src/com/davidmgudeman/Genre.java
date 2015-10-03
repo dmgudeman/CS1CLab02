@@ -57,7 +57,7 @@ public class Genre
             jazz.add(s);
          }
       }
-      System.out.println("I GOT HERE");
+ /*     System.out.println("I GOT HERE");
          System.out.println("CLASSICAL SIZE " + classical.size());
          System.out.println("tunes " + tunes.size());
          printArrayListTunes(classical);
@@ -67,21 +67,19 @@ public class Genre
          printArrayListTunes(punk);
          printArrayListTunes(metal);
          printArrayListTunes(jazz);
-      
+      */
    }
    public void printArrayListTunes(ArrayList<SongEntry> list)
    {
       int counter = 1;
       for (SongEntry s : list)
       {
+      
+         System.out.println(s.getTitle() + ", " + s.getArtistName() + ", " +  s.getGenre() + ", " + s.getDuration());
          System.out.println();
-         System.out.println("Song number " + counter);
-         System.out.println(s.getArtistName());
-         System.out.println(s.getDuration());
-         System.out.println(s.getGenre());
-         System.out.println(s.getTitle());
          counter++;
       }
+      System.out.println("The list has " + counter + " elements.");
    }
    
   

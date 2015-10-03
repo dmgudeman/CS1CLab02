@@ -29,6 +29,9 @@ package com.davidmgudeman;
  */
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cs1c.SongEntry;
 
@@ -54,7 +57,45 @@ public class MyTunes
 
    public MyTunes(FoothillTunesStore store)
    {
-      // TODO Auto-generated constructor stub
+ 
+   }
+   
+   public static void choosing (int choice)
+   {
+      
+      switch(choice) 
+      {
+      case 0 :
+         System.out.println("stopping");
+         break;
+      case 1:
+         System.out.println("HELP MENU");
+         break;
+      case 2:
+         System.out.println("Songs by Title");
+         break;
+      case 3:
+         System.out.println("Songs by genre");
+         break;
+      case 4:
+         System.out.println("Buying song entitled:");
+         break;
+      case 5:
+         System.out.println("Creating playlist");
+         break;
+      
+         
+         
+         
+      }
+         
+      
+      
+      
+      
+      
+      
+      
    }
 
    /**
@@ -91,6 +132,16 @@ public class MyTunes
          FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
       //   tunes.printArrayListTunes();
          Genre genre = new Genre(tunes);
+         Scanner keyboard = new Scanner(System.in);
+         {
+            Pattern intsOnly = Pattern
+                  .compile("([\\+-]?\\d+)([eE][\\+-]?\\d+)?");
+            Matcher makeMatch = intsOnly.matcher(keyboard.next());
+            makeMatch.find();
+            String str = makeMatch.group();
+            Integer choice = Integer.parseInt(str);
+            System.out.println("THIS IS YOUR CHOICE "+ choice);
+         }
 /*
          // display unsorted array of songs
          System.out.println("Completed parsing JSON file.");
