@@ -89,7 +89,8 @@ public class MyTunes
       printMenu();
     
          FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
-         tunes.printArrayListTunes();
+      //   tunes.printArrayListTunes();
+         Genre genre = new Genre(tunes);
 /*
          // display unsorted array of songs
          System.out.println("Completed parsing JSON file.");
