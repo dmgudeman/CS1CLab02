@@ -62,7 +62,8 @@ public class MyTunes
    
    public static void choosing (int choice)
    {
-      
+      FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
+      Genre genre = new Genre(tunes);
       switch(choice) 
       {
       case 0 :
@@ -73,9 +74,11 @@ public class MyTunes
          break;
       case 2:
          System.out.println("Songs by Title");
+         tunes.printAllSongs();
          break;
       case 3:
          System.out.println("Songs by genre");
+         genre.printByGenre();
          break;
       case 4:
          System.out.println("Buying song entitled:");
@@ -83,19 +86,9 @@ public class MyTunes
       case 5:
          System.out.println("Creating playlist");
          break;
-      
-         
-         
-         
+        
       }
-         
-      
-      
-      
-      
-      
-      
-      
+     
    }
 
    /**
@@ -129,7 +122,7 @@ public class MyTunes
    public static void main(String[] args) {
       printMenu();
     
-         FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
+        FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
       //   tunes.printArrayListTunes();
          Genre genre = new Genre(tunes);
          Scanner keyboard = new Scanner(System.in);
@@ -141,6 +134,7 @@ public class MyTunes
             String str = makeMatch.group();
             Integer choice = Integer.parseInt(str);
             System.out.println("THIS IS YOUR CHOICE "+ choice);
+            choosing(choice);
          }
 /*
          // display unsorted array of songs

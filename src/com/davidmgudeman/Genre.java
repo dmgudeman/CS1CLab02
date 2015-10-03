@@ -10,20 +10,21 @@ public class Genre
   
    
    public int index = 0;
+  
+   ArrayList<SongEntry> classical = new ArrayList<>();
+   ArrayList<SongEntry> soul = new ArrayList<>();
+   ArrayList<SongEntry> rock = new ArrayList<>();
+   ArrayList<SongEntry> dance = new ArrayList<>();
+   ArrayList<SongEntry> folk = new ArrayList<>();
+   ArrayList<SongEntry> punk = new ArrayList<>();
+   ArrayList<SongEntry> metal = new ArrayList<>();
+   ArrayList<SongEntry> jazz = new ArrayList<>();
    
     
    public Genre(FoothillTunesStore store)
    {
       
       ArrayList<SongEntry> tunes = store.getListOfSongs();
-      ArrayList<SongEntry> classical = new ArrayList<>();
-      ArrayList<SongEntry> soul = new ArrayList<>();
-      ArrayList<SongEntry> rock = new ArrayList<>();
-      ArrayList<SongEntry> dance = new ArrayList<>();
-      ArrayList<SongEntry> folk = new ArrayList<>();
-      ArrayList<SongEntry> punk = new ArrayList<>();
-      ArrayList<SongEntry> metal = new ArrayList<>();
-      ArrayList<SongEntry> jazz = new ArrayList<>();
       
       for (SongEntry s : tunes)
       { 
@@ -57,17 +58,15 @@ public class Genre
             jazz.add(s);
          }
       }
- /*     System.out.println("I GOT HERE");
-         System.out.println("CLASSICAL SIZE " + classical.size());
-         System.out.println("tunes " + tunes.size());
-         printArrayListTunes(classical);
+      
+   /*      printArrayListTunes(classical);
          printArrayListTunes(rock);
          printArrayListTunes(dance);
          printArrayListTunes(folk);
          printArrayListTunes(punk);
          printArrayListTunes(metal);
          printArrayListTunes(jazz);
-      */
+     */
    }
    public void printArrayListTunes(ArrayList<SongEntry> list)
    {
@@ -82,5 +81,19 @@ public class Genre
       System.out.println("The list has " + counter + " elements.");
    }
    
+   public void printByGenre()
+   {
+      System.out.println("CLASSICAL:_________________________________");
+      printArrayListTunes(classical);
+      System.out.println();
+      printArrayListTunes(rock);
+      System.out.println();
+      printArrayListTunes(dance);
+      System.out.println();
+      printArrayListTunes(folk);
+      printArrayListTunes(punk);
+      printArrayListTunes(metal);
+      printArrayListTunes(jazz);
+   }
   
 }
