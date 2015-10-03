@@ -148,4 +148,47 @@ public class FoothillTunesStore
    {
       System.out.println(song.getTitle());
    }
+   
+   public void findTimedPlayList(Integer duration)
+   {
+      Boolean foundSubSet = false;
+      ArrayList<SongEntry> Col;
+      int maxSize = 0;
+      Col = new ArrayList<>();
+      SongEntry emptySet = new SongEntry(null, 0, null, null);
+      ArrayList<Integer> maxSubSet = null;
+    
+      Col.add(emptySet);
+      for (SongEntry song : tunes)
+      {
+         if (foundSubSet == false)
+         {
+            int size = Col.size();
+            for (int i = 0; i < size; i++)
+            {
+               ArrayList<SongEntry> newSubSet = (ArrayList<SongEntry>) Col.get(i)
+                     .clone();
+               newSubSet.add(item);
+               int newSubSetSize = listSummation(newSubSet);
+               if (newSubSetSize < budget)
+               {
+                  if (newSubSetSize > maxSize)
+                     maxSize = newSubSetSize;
+                     maxSubSet = newSubSet;
+                  Col.add(newSubSet);
+               }
+               if (newSubSetSize == budget)
+               {
+                  foundSubSet = true;
+                  printSubSet(newSubSet);
+                  break;
+               }
+            }
+         }
+        
+      }
+      if (foundSubSet == false)
+      printSubSet(maxSubSet);
+      
+   }
 }

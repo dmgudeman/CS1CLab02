@@ -90,6 +90,11 @@ public class MyTunes
          s.close();
          break;
       case 5:
+         System.out.println("How long in minutes would you like the playlist to be?");
+         Scanner s2 = new Scanner(System.in);
+         Integer playListLength = Integer.parseInt(s2.nextLine());
+         System.out.println("This what you input " + playListLength + " minutes.");     
+         s2.close();
          System.out.println("Creating playlist");
          break;
         
