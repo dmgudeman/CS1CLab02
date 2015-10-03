@@ -54,6 +54,7 @@ public class MyTunes
    private static final String jsonFilePath = "resources/music_genre_subset.json";
    private static final boolean ENABLE_DATA_OUTPUT = true;
    private static String jsonFileName = "music_genre_subset.json";
+   static Scanner keyboard = new Scanner(System.in);
 
    public MyTunes(FoothillTunesStore store)
    {
@@ -82,6 +83,11 @@ public class MyTunes
          break;
       case 4:
          System.out.println("Buying song entitled:");
+         Scanner s = new Scanner(System.in);
+         String song = s.nextLine();
+         System.out.println("This what you input " + song);
+         tunes.findSongByTitle(song);
+         s.close();
          break;
       case 5:
          System.out.println("Creating playlist");
@@ -125,7 +131,7 @@ public class MyTunes
         FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
       //   tunes.printArrayListTunes();
          Genre genre = new Genre(tunes);
-         Scanner keyboard = new Scanner(System.in);
+     
          {
             Pattern intsOnly = Pattern
                   .compile("([\\+-]?\\d+)([eE][\\+-]?\\d+)?");

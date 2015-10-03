@@ -111,4 +111,41 @@ public class FoothillTunesStore
          counter++;
       }
    }
+   public void printSubListTunes(ArrayList<SongEntry> song)
+   {   
+      System.out.println("Number of found songs: " + song.size());
+      for (SongEntry s : song)
+      {
+        System.out.println(s.toString()); 
+      }
+   }
+
+   public SongEntry findSongByTitle(String title)
+   {   
+      ArrayList<SongEntry> foundTitles = new ArrayList<>();
+      SongEntry song = null;
+      try
+      {
+         for (SongEntry s : tunes)
+         {
+            if (s.getTitle().equals(title))
+            {
+               song = s;
+               foundTitles.add(s);
+            }
+         }
+         printSubListTunes(foundTitles);
+         return song;
+      } catch (Exception e)
+      {
+         System.out.println("Title not found");
+         return null;
+      }
+
+   }
+
+   public void printSong(SongEntry song)
+   {
+      System.out.println(song.getTitle());
+   }
 }
