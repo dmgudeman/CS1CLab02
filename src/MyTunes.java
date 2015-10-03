@@ -24,17 +24,8 @@
  *
  */
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import cs1c.MillionSongDataSubset;
 import cs1c.SongEntry;
 
 /**
@@ -53,9 +44,9 @@ public class MyTunes
 
    private ArrayList<SongEntry> purchasedTunes;
    private FoothillTunesStore theStore;
-
    private static final String jsonFilePath = "resources/music_genre_subset.json";
    private static final boolean ENABLE_DATA_OUTPUT = true;
+   private static String jsonFileName = "music_genre_subset.json";
 
    public MyTunes(FoothillTunesStore store)
    {
@@ -92,22 +83,10 @@ public class MyTunes
     */
    public static void main(String[] args) {
       printMenu();
-
-      JSONParser jsonParser = new JSONParser();
-
-      try {
-
-         // --------------------
-         // parse the JSON file
-         FileReader fileReader = new FileReader(jsonFilePath);
-
-         JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
-
-         JSONArray allSongs = (JSONArray) jsonObject.get("songs");
-
-         System.out.println("Parsing JSON file...");
-         MillionSongDataSubset dataSet = new MillionSongDataSubset(allSongs);
-
+    
+         FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
+         tunes.printArrayListTunes();
+/*
          // display unsorted array of songs
          System.out.println("Completed parsing JSON file.");
          if (ENABLE_DATA_OUTPUT)
@@ -138,12 +117,6 @@ public class MyTunes
   //             + TimeConverter.convertTimeToString(estimatedTime) + ", "
   //             + " seconds.\n");
 
-      } 
-      catch (FileNotFoundException e) 
-      {  e.printStackTrace(); } 
-      catch (IOException e) 
-      {  e.printStackTrace(); } 
-      catch (ParseException e) 
-      {  e.printStackTrace(); }
+  */
    }
 }
