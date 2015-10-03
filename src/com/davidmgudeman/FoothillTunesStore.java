@@ -149,7 +149,7 @@ public class FoothillTunesStore
       System.out.println(song.getTitle());
    }
    
-   public void findTimedPlayList(Integer duration)
+ /*  public void findTimedPlayList(Integer duration)
    {
       Boolean foundSubSet = false;
       ArrayList<SongEntry> Col;
@@ -191,4 +191,5 @@ public class FoothillTunesStore
       printSubSet(maxSubSet);
       
    }
+   */
 }

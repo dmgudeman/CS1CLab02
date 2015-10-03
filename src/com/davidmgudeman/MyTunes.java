@@ -60,6 +60,7 @@ public class MyTunes
    {
  
    }
+  
    
    public static void choosing (int choice)
    {
@@ -91,9 +92,12 @@ public class MyTunes
          break;
       case 5:
          System.out.println("How long in minutes would you like the playlist to be?");
+         TunesSubSet subSet = new TunesSubSet(tunes);
          Scanner s2 = new Scanner(System.in);
          Integer playListLength = Integer.parseInt(s2.nextLine());
-         System.out.println("This what you input " + playListLength + " minutes.");     
+         System.out.println("This what you input " + playListLength + " minutes."); 
+         subSet.findSubSet(playListLength);
+         subSet.printTunesSubSet();
          s2.close();
          System.out.println("Creating playlist");
          break;
@@ -147,6 +151,11 @@ public class MyTunes
             System.out.println("THIS IS YOUR CHOICE "+ choice);
             choosing(choice);
          }
+         
+         TunesSubSet test = new TunesSubSet(tunes);
+      //1
+         
+
 /*
          // display unsorted array of songs
          System.out.println("Completed parsing JSON file.");
