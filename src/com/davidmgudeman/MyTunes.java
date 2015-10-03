@@ -1,4 +1,8 @@
+package com.davidmgudeman;
+
 /**
+
+
  * Creates an object of type FoothillTunesStore which parses a data file
  * in JSON format. Reads an input file that contains users selected actions.
  * Prints out a menu with available actions we can take.

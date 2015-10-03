@@ -1,3 +1,5 @@
+package com.davidmgudeman;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +16,7 @@ import cs1c.SongEntry;
 public class FoothillTunesStore
 {
    private static final boolean ENABLE_DATA_OUTPUT = false;
- 
+
    private ArrayList<SongEntry> tunes;
    private ArrayList<Genre> genres;
    private SongEntry[] arrayOfSongs;
@@ -30,6 +32,7 @@ public class FoothillTunesStore
 
    public FoothillTunesStore(String jsonFileName)
    {
+
       String jsonFilePath = "resources/" + jsonFileName;
       JSONParser jsonParser = new JSONParser();
 
@@ -79,9 +82,10 @@ public class FoothillTunesStore
    /**
     * returns the array of song entries
     */
-   public SongEntry[] getArrayOfSongs()
+   public ArrayList<SongEntry> getListOfSongs()
    {
-      return arrayOfSongs;
+      ArrayList<SongEntry> list = this.tunes;
+      return list;
    }
 
    /**
@@ -92,7 +96,7 @@ public class FoothillTunesStore
       for (SongEntry song : arrayOfSongs)
          System.out.println(song);
    }
-   
+
    public void printArrayListTunes()
    {
       int counter = 1;
