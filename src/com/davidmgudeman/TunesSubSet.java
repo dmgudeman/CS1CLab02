@@ -23,9 +23,19 @@ public class TunesSubSet
 
    }
 
+   public boolean avoidDuplicates(ArrayList<SongEntry> list, SongEntry song)
+   {
+      if (list.contains(song))
+      {
+      return true;
+      }
+      return false;
+   }
    public TunesSubSet makeSubSet(TunesSubSet originalTunesSubSet,
          SongEntry newSong) throws CloneNotSupportedException
    {
+      
+      
       TunesSubSet newTunesSubSet = new TunesSubSet(originalStore);
       for (SongEntry s : originalTunesSubSet.currentSubSet)
       {
@@ -42,8 +52,8 @@ public class TunesSubSet
             + newTunesSubSet.subSetSize);
 
       return newTunesSubSet;
+   
    }
-
    public int getSubSetDuration()
    {
       return this.subSetDuration;
@@ -68,12 +78,13 @@ public class TunesSubSet
                System.out.println(" i "  + i + "; Col.size(): " + Col.size());
                Col.get(i);
                             
-               if (Col.get(i).subSetDuration + e.getDuration() <= duration)
+               if (Col.get(i).subSetDuration + e.getDuration() <= duration
+                     && !avoidDuplicates(Col.get(i).currentSubSet, e))
                {
                   try
                   {
                      subSet = (TunesSubSet) makeSubSet(Col.get(i), e);
-                     subSet.printTunesSubSet();
+                     subSet.printTunesSubSet(subSet);
                   } catch (CloneNotSupportedException e1)
                   {
                      System.out
@@ -88,6 +99,7 @@ public class TunesSubSet
                {
                   System.out.println("subset found");
                   foundSubSet = true;
+                  printTunesSubSet(subSet);
                   return subSet;
                }
                size = Col.size();
@@ -98,13 +110,13 @@ public class TunesSubSet
       return maxSubSet;
    }
 
-   public void printTunesSubSet()
+   public void printTunesSubSet(TunesSubSet tunesSubSet)
    {
-      System.out.println("subset Size" + this.subSetSize);
-      System.out.println("subset Duration" + this.subSetDuration);
+      System.out.println("subset Size" + tunesSubSet.subSetSize);
+      System.out.println("subset Duration" + tunesSubSet.subSetDuration);
       try
       {
-         for (SongEntry s : currentSubSet)
+         for (SongEntry s : tunesSubSet.currentSubSet)
 
             System.out.println(s.toString());
       } catch (NullPointerException e)
