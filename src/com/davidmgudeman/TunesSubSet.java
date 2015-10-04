@@ -44,14 +44,10 @@ public class TunesSubSet
          newTunesSubSet.currentSubSet.add(as);
          
       }
-      System.out.println("NNNEWW SONNG" + newSong.getDuration());
-      System.out.println("DDDDDDDUUUUURRRRRRAAAAATTTTION" + originalTunesSubSet.subSetDuration);
+     
       newTunesSubSet.subSetDuration = originalTunesSubSet.subSetDuration
             + newSong.getDuration();
-      
-      System.out.println("VVVVVVVVVVVVVVVV = "+ newTunesSubSet.subSetDuration);
-      
-
+  
       newTunesSubSet.subSetSize = originalTunesSubSet.subSetSize + 1;
       newTunesSubSet.currentSubSet.add(newSong);
 
@@ -102,14 +98,14 @@ public class TunesSubSet
                }
                else if (Col.get(i).subSetDuration + e.getDuration() == duration)
                {
-                  System.out.println("SUBSET FOUND");              
-                  System.out.println("SUBSET DURATION =" + Col.get(i).subSetDuration + e.getDuration());
-                  System.out.println("NNNEWW SONNG" + e.getDuration());
-                  System.out.println("DDDDDDDUUUUURRRRRRAAAAATTTTION" + Col.get(i).subSetDuration);
+                //  System.out.println("SUBSET FOUND");              
+               ////   System.out.println("SUBSET DURATION =" + Col.get(i).subSetDuration + e.getDuration());
+               //   System.out.println("NNNEWW SONNG" + e.getDuration());
+              //    System.out.println("DDDDDDDUUUUURRRRRRAAAAATTTTION" + Col.get(i).subSetDuration);
                   subSet.subSetDuration = Col.get(i).subSetDuration
                         + e.getDuration();
                   
-                  System.out.println("VVVVVVVVVVVVVVVV = "+ subSet.subSetDuration);
+              //    System.out.println("VVVVVVVVVVVVVVVV = "+ subSet.subSetDuration);
                   foundSubSet = true;
                   printTunesSubSet(subSet);
                   return subSet;
@@ -122,8 +118,8 @@ public class TunesSubSet
    }
 
    public void printTunesSubSet(TunesSubSet tunesSubSet)
-   {
-      System.out.println("subset Size" + tunesSubSet.subSetSize);
+   {  System.out.println("subset Duration " + (tunesSubSet.subSetDuration/60) + " minutes.");
+      System.out.println("subset Size " + tunesSubSet.subSetSize);
     
       try
       {

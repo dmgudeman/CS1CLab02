@@ -47,3 +47,23 @@ Blue Jay, 0:3:43, Steve Lacy, jazz and blues
 
 Algorithm Elapsed Time: 0 hrs : 0 mins : 0 sec : 14 ms : 983434 ns : ,  seconds.
 
+
+------------------------------------------------------------------------------
+
+5
+THIS IS YOUR CHOICE 5
+Parsing JSON file...
+How long in minutes would you like the playlist to be?
+20
+This what you input 20 minutes.
+Creating playlist
+subset Duration 20 minutes.
+subset Size 6
+Morning Final, 0:4:14, Blue Oyster Cult, classic pop and rock
+The Revenge Of Vera Gemini, 0:3:50, Blue Oyster Cult, classic pop and rock
+True Confessions, 0:2:57, Blue Oyster Cult, classic pop and rock
+Out Of Stadion - Original, 0:1:21, Blue Oyster Cult, classic pop and rock
+Ginger Snaps - Original, 0:1:34, Blue Oyster Cult, classic pop and rock
+Demon's Kiss - Original, 0:3:52, Blue Oyster Cult, classic pop and rock
+
+Algorithm Elapsed Time: 0 hrs : 0 mins : 0 sec : 12 ms : 613792 ns : ,  seconds.

@@ -17,14 +17,14 @@ package com.davidmgudeman;
  *
  * NOTE: Due to a few data points in the json file, such as:
  * ,
-{
-        "genre": "classic pop and rock",
-        "artist_name": "Crosby_ Stills_ Nash and Young",
-        "title": "Carry On",
-        "duration": "0.80934"
-},
+ {
+ "genre": "classic pop and rock",
+ "artist_name": "Crosby_ Stills_ Nash and Young",
+ "title": "Carry On",
+ "duration": "0.80934"
+ },
  * Modify the constructor for class MillionSongDataSubset to save "duration" as follows:
-        int duration = (int)Math.ceil(Double.parseDouble(currentJson.get("duration").toString()));
+ int duration = (int)Math.ceil(Double.parseDouble(currentJson.get("duration").toString()));
  *
  */
 
@@ -41,37 +41,25 @@ import cs1c.TimeConverter;
  */
 public class MyTunes
 {
-   private static final int QUIT = 0;
-   private static final int HELP_MENU = 1;
-   private static final int LIST_SONG_TITLES = 2;
-   private static final int LIST_SONGS_BY_GENRE = 3;
-   private static final int BUY_SONG_TITLE = 4;
-   private static final int CREATE_PLAYLIST = 5;
 
-   private static final boolean ENABLE_RANDOM_PURCHASE = false;
-
-   private ArrayList<SongEntry> purchasedTunes;
-   private FoothillTunesStore theStore;
-   private static final String jsonFilePath = "resources/music_genre_subset.json";
-   private static final boolean ENABLE_DATA_OUTPUT = true;
+   private ArrayList<SongEntry> purchasedTunes;  
    private static String jsonFileName = "music_genre_subset.json";
    static Scanner keyboard = new Scanner(System.in);
-   
 
    public MyTunes(FoothillTunesStore store)
    {
- 
+
    }
-    
-   public static void choosing (int choice)
+
+   public static void choosing(int choice)
    {
       long startTime, estimatedTime = 0;
-      
+
       FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
-     
-      switch(choice) 
+
+      switch (choice)
       {
-      case 0 :
+      case 0:
          System.out.println("stopping");
          break;
       case 1:
@@ -79,7 +67,7 @@ public class MyTunes
          break;
       case 2:
          System.out.println("Songs by Title");
-         startTime = System.nanoTime();  
+         startTime = System.nanoTime();
          tunes.printAllSongs();
          estimatedTime = System.nanoTime() - startTime;
          break;
@@ -95,33 +83,34 @@ public class MyTunes
          Scanner s = new Scanner(System.in);
          String song = s.nextLine();
          System.out.println("This what you input " + song);
-         startTime = System.nanoTime(); 
+         startTime = System.nanoTime();
          tunes.findSongByTitle(song);
          estimatedTime = System.nanoTime() - startTime;
          s.close();
          break;
       case 5:
-         System.out.println("How long in minutes would you like the playlist to be?");
+         System.out
+               .println("How long in minutes would you like the playlist to be?");
          TunesSubSet subSet = new TunesSubSet(tunes);
          Scanner s2 = new Scanner(System.in);
          Integer playListLength = Integer.parseInt(s2.nextLine());
-         System.out.println("This what you input " + playListLength + " minutes."); 
+         System.out.println("This what you input " + playListLength
+               + " minutes.");
+         System.out.println("Creating playlist");
          int playMilli = playListLength * 60;
-         System.out.println("bbbb" + playMilli);
-         startTime = System.nanoTime(); 
+         startTime = System.nanoTime();
          subSet.findSubSet(playMilli);
-       //  subSet.printTunesSubSet(subSet);
          estimatedTime = System.nanoTime() - startTime;
          s2.close();
-         System.out.println("Creating playlist");
+
          break;
-        
+
       }
-   // report algorithm time
-           System.out.println("\nAlgorithm Elapsed Time: "
-              + TimeConverter.convertTimeToString(estimatedTime) + ", "
-                  + " seconds.\n");
-     
+      // report algorithm time
+      System.out.println("\nAlgorithm Elapsed Time: "
+            + TimeConverter.convertTimeToString(estimatedTime) + ", "
+            + " seconds.\n");
+
    }
 
    /**
@@ -148,26 +137,25 @@ public class MyTunes
    }
 
    /**
-    * Calls a JSONParse part of the "org.json.simple" package to parse the input file.
-    * Stores each song entry in an array of SongEntry.
-    * Demonstrates measuring elapsed time of an example algorithm.
+    * Calls a JSONParse part of the "org.json.simple" package to parse the input
+    * file. Stores each song entry in an array of SongEntry. Demonstrates
+    * measuring elapsed time of an example algorithm.
     */
-   public static void main(String[] args) {
+   public static void main(String[] args)
+   {
       printMenu();
-    
-        FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
-     
-         {
-            Pattern intsOnly = Pattern
-                  .compile("([\\+-]?\\d+)([eE][\\+-]?\\d+)?");
-            Matcher makeMatch = intsOnly.matcher(keyboard.next());
-            makeMatch.find();
-            String str = makeMatch.group();
-            Integer choice = Integer.parseInt(str);
-            System.out.println("THIS IS YOUR CHOICE "+ choice);
-            choosing(choice);
-         }
-         
-        
+
+      FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
+
+      {
+         Pattern intsOnly = Pattern.compile("([\\+-]?\\d+)([eE][\\+-]?\\d+)?");
+         Matcher makeMatch = intsOnly.matcher(keyboard.next());
+         makeMatch.find();
+         String str = makeMatch.group();
+         Integer choice = Integer.parseInt(str);
+         System.out.println("THIS IS YOUR CHOICE " + choice);
+         choosing(choice);
+      }
+
    }
 }
