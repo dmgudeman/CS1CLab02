@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cs1c.SongEntry;
+import cs1c.TimeConverter;
 
 /**
  * An object of a class stores and manages purchased tunes.
@@ -55,15 +56,17 @@ public class MyTunes
    private static final boolean ENABLE_DATA_OUTPUT = true;
    private static String jsonFileName = "music_genre_subset.json";
    static Scanner keyboard = new Scanner(System.in);
+   
 
    public MyTunes(FoothillTunesStore store)
    {
  
    }
-  
-   
+    
    public static void choosing (int choice)
    {
+      long startTime, estimatedTime = 0;
+      
       FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
       Genre genre = new Genre(tunes);
       switch(choice) 
@@ -76,18 +79,24 @@ public class MyTunes
          break;
       case 2:
          System.out.println("Songs by Title");
+         startTime = System.nanoTime();  
          tunes.printAllSongs();
+         estimatedTime = System.nanoTime() - startTime;
          break;
       case 3:
          System.out.println("Songs by genre");
+         startTime = System.nanoTime(); 
          genre.printByGenre();
+         estimatedTime = System.nanoTime() - startTime;
          break;
       case 4:
          System.out.println("Buying song entitled:");
          Scanner s = new Scanner(System.in);
          String song = s.nextLine();
          System.out.println("This what you input " + song);
+         startTime = System.nanoTime(); 
          tunes.findSongByTitle(song);
+         estimatedTime = System.nanoTime() - startTime;
          s.close();
          break;
       case 5:
@@ -97,13 +106,19 @@ public class MyTunes
          Integer playListLength = Integer.parseInt(s2.nextLine());
          System.out.println("This what you input " + playListLength + " minutes."); 
          int playMilli = playListLength * 60;
+         startTime = System.nanoTime(); 
          subSet.findSubSet(playMilli);
-         subSet.printTunesSubSet(subSet);
+       //  subSet.printTunesSubSet(subSet);
+         estimatedTime = System.nanoTime() - startTime;
          s2.close();
          System.out.println("Creating playlist");
          break;
         
       }
+   // report algorithm time
+           System.out.println("\nAlgorithm Elapsed Time: "
+              + TimeConverter.convertTimeToString(estimatedTime) + ", "
+                  + " seconds.\n");
      
    }
 
@@ -140,7 +155,7 @@ public class MyTunes
     
         FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
       //   tunes.printArrayListTunes();
-         Genre genre = new Genre(tunes);
+     //    Genre genre = new Genre(tunes);
      
          {
             Pattern intsOnly = Pattern

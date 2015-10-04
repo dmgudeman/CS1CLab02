@@ -27,15 +27,15 @@ public class TunesSubSet
    {
       if (list.contains(song))
       {
-      return true;
+         return true;
       }
       return false;
    }
+
    public TunesSubSet makeSubSet(TunesSubSet originalTunesSubSet,
          SongEntry newSong) throws CloneNotSupportedException
    {
-      
-      
+
       TunesSubSet newTunesSubSet = new TunesSubSet(originalStore);
       for (SongEntry s : originalTunesSubSet.currentSubSet)
       {
@@ -52,8 +52,9 @@ public class TunesSubSet
             + newTunesSubSet.subSetSize);
 
       return newTunesSubSet;
-   
+
    }
+
    public int getSubSetDuration()
    {
       return this.subSetDuration;
@@ -66,18 +67,19 @@ public class TunesSubSet
       TunesSubSet maxSubSet = new TunesSubSet(originalStore);
       TunesSubSet emptySubSet = new TunesSubSet(originalStore);
       Col.add(emptySubSet);
-      int size = 0;
+
       TunesSubSet subSet = new TunesSubSet(originalStore);
-      
-      for (SongEntry e : maxSubSet.tunesList)
-      {         
+
+      for (SongEntry e : emptySubSet.tunesList)
+      {
+
          if (foundSubSet == false)
-         {        
-            for (int i = 0; i < Col.size();i ++)
+         {
+            for (int i = 0; i < Col.size(); i++)
             {
-               System.out.println(" i "  + i + "; Col.size(): " + Col.size());
+               System.out.println(" i " + i + "; Col.size(): " + Col.size());
                Col.get(i);
-                            
+
                if (Col.get(i).subSetDuration + e.getDuration() <= duration
                      && !avoidDuplicates(Col.get(i).currentSubSet, e))
                {
@@ -128,6 +130,7 @@ public class TunesSubSet
    public int getSize()
    {
       return subSetSize;
+
    }
 
 }
