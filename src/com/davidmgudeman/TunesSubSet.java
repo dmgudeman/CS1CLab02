@@ -23,23 +23,23 @@ public class TunesSubSet
 
    }
 
-   public TunesSubSet makeSubSet(TunesSubSet originalTunesSubSet, SongEntry newSong)
-         throws CloneNotSupportedException
+   public TunesSubSet makeSubSet(TunesSubSet originalTunesSubSet,
+         SongEntry newSong) throws CloneNotSupportedException
    {
       TunesSubSet newTunesSubSet = new TunesSubSet(originalStore);
-      for(SongEntry s: originalTunesSubSet.currentSubSet)
+      for (SongEntry s : originalTunesSubSet.currentSubSet)
       {
-         SongEntry as =  s;
-         newTunesSubSet.currentSubSet.add(as);     
-      }      
+         SongEntry as = s;
+         newTunesSubSet.currentSubSet.add(as);
+      }
       newTunesSubSet.subSetDuration = originalTunesSubSet.subSetDuration
             + newSong.getDuration();
-      
-      newTunesSubSet.subSetSize = originalTunesSubSet.subSetSize +1 ;
+
+      newTunesSubSet.subSetSize = originalTunesSubSet.subSetSize + 1;
       newTunesSubSet.currentSubSet.add(newSong);
-    //  newSubSet.currentSubSet.add(newSong);
-      System.out.println(newTunesSubSet.subSetSize);
-     newTunesSubSet.printTunesSubSet();
+      // newSubSet.currentSubSet.add(newSong);
+      System.out.println("INNNNNNN   TUNNESSUBSEETTT   "
+            + newTunesSubSet.subSetSize);
 
       return newTunesSubSet;
    }
@@ -51,44 +51,49 @@ public class TunesSubSet
 
    public TunesSubSet findSubSet(int duration)
    {
+      Boolean foundSubSet = false;
       ArrayList<TunesSubSet> Col = new ArrayList<>();
       TunesSubSet maxSubSet = new TunesSubSet(originalStore);
       TunesSubSet emptySubSet = new TunesSubSet(originalStore);
       Col.add(emptySubSet);
       int size = 0;
-
-      for (SongEntry e : originalStore.getListOfSongs())
-      {
-         TunesSubSet subSet = new TunesSubSet(originalStore);
-         Col.size();
-         for (int i= 0; i <= size; i++)
-         {
-            if (Col.get(i).subSetDuration + e.getDuration() <= duration)
-            {            
-               try
+      TunesSubSet subSet = new TunesSubSet(originalStore);
+      
+      for (SongEntry e : maxSubSet.tunesList)
+      {         
+         if (foundSubSet == false)
+         {        
+            for (int i = 0; i < Col.size();i ++)
+            {
+               System.out.println(" i "  + i + "; Col.size(): " + Col.size());
+               Col.get(i);
+                            
+               if (Col.get(i).subSetDuration + e.getDuration() <= duration)
                {
-                  System.out.println("DURATION = " + duration);
-                  System.out.println("e.getDuration " + e.getDuration());
-                  System.out.println("Col.get(i).subSetDuration" + Col.get(i).subSetDuration);
-                  subSet = (TunesSubSet) makeSubSet(Col.get(i), e);
-                  System.out.println("subset.subSetDuration = " + subSet.subSetDuration);
-                 subSet.printTunesSubSet();
-               } catch (CloneNotSupportedException e1)
-               {
-                  System.out.println("Clone didn;t happen findSubSet method");
-                  e1.printStackTrace();
+                  try
+                  {
+                     subSet = (TunesSubSet) makeSubSet(Col.get(i), e);
+                     subSet.printTunesSubSet();
+                  } catch (CloneNotSupportedException e1)
+                  {
+                     System.out
+                           .println("Clone didn;t happen findSubSet method");
+                     e1.printStackTrace();
+                  }
+                  Col.add(subSet);
+                  System.out.println("Col.size()" + Col.size());
+                  maxSubSet = subSet;
                }
-               Col.add(subSet);
-              
-               System.out.println("Col.size()" + Col.size());
-               maxSubSet = subSet;
+               if (Col.get(i).subSetDuration + e.getDuration() == duration)
+               {
+                  System.out.println("subset found");
+                  foundSubSet = true;
+                  return subSet;
+               }
+               size = Col.size();
             }
-            if (Col.get(i).subSetDuration + e.getDuration() == duration)
-     
-               System.out.println("subset found");
-               return subSet;
-            }
-         
+         }
+
       }
       return maxSubSet;
    }
@@ -100,7 +105,7 @@ public class TunesSubSet
       try
       {
          for (SongEntry s : currentSubSet)
-            
+
             System.out.println(s.toString());
       } catch (NullPointerException e)
       {
