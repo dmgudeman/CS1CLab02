@@ -30,11 +30,50 @@ Algorithm Elapsed Time: 0 hrs : 0 mins : 0 sec : 3 ms : 994638 ns : ,  seconds.
 ------------------------------------
 
 Part 2:
+2
+TRUNCATED THIS IS THE LAST PART
+Fall In Love (your funeral), 0:6:6, Erykah Badu, soul and reggae
+Umm Hmm, 0:3:45, Erykah Badu, soul and reggae
+Window Seat, 0:4:49, Erykah Badu, soul and reggae
+Back In The Day, 0:4:46, Erykah Badu, soul and reggae
+Danger, 0:5:48, Erykah Badu, soul and reggae
+Hollywood, 0:5:32, Erykah Badu, soul and reggae
+Think Twice, 0:3:2, Erykah Badu, soul and reggae
+The Grind, 0:2:49, Erykah Badu / Dead Prez, soul and reggae
+I Want You, 0:10:53, Erykah Badu, soul and reggae
 
-choices 2 and 3 work but they are too big to copy here;
-I only had time to put the filter in for classical in choice 3 but putting the 
-other genre filters in will be easy.
+Algorithm Elapsed Time: 0 hrs : 0 mins : 3 sec : 611 ms : 876484 ns : ,  seconds
+.
+___________________________________________________________
 
+3
+TRUNCATED THIS IS THE LAST PART
+I Heard The Bells on Christmas Day, Jane Monheit, jazz and blues, 162
+Sleighride, Jane Monheit, jazz and blues, 166
+The Christmas Waltz, Jane Monheit, jazz and blues, 170
+The Man With The Bag, Jane Monheit, jazz and blues, 122
+Moonlight In Vermont, Jane Monheit, jazz and blues, 300
+Bluring, Scorch Trio, jazz and blues, 771
+Graps, Scorch Trio, jazz and blues, 275
+Hys, Scorch Trio, jazz and blues, 390
+Gaba, Scorch Trio, jazz and blues, 746
+Basjen, Scorch Trio, jazz and blues, 275
+Olstra, Scorch Trio, jazz and blues, 613
+Brennj Fynnj, Scorch Trio, jazz and blues, 391
+Furskunjt, Scorch Trio, jazz and blues, 372
+Synnja Vegga, Scorch Trio, jazz and blues, 303
+Luggumt, Scorch Trio, jazz and blues, 744
+SnÃ_kje Rojnd NÃ_vinj, Scorch Trio, jazz and blues, 280
+KjÃ¸le HÃ¸le, Scorch Trio, jazz and blues, 751
+Morning Heavy Song, Tomasz Stanko_ Bobo Stenson_ Anders Jormin_ Tony Oxley_ Toma
+sz Stanko_ Bobo Stenson_ Anders Jormin_, jazz and blues, 405
+Sleep Safe And Warm, Tomasz Stanko_ Bernt Rosengren_ Joakim Milder_ Bobo Stenson
+_ Palle Danielsson_ Jon Christensen_ Terj, jazz and blues, 126
+The list has 4335 elements.
+
+
+Algorithm Elapsed Time: 0 hrs : 0 mins : 2 sec : 509 ms : 89484 ns : ,  seconds.
+_______________________________________________________________
 4
 THIS IS YOUR CHOICE 4
 Parsing JSON file...
