@@ -55,17 +55,21 @@ public class TunesSubSet
       TunesSubSet maxSubSet = new TunesSubSet(originalStore);
       TunesSubSet emptySubSet = new TunesSubSet(originalStore);
       Col.add(emptySubSet);
+      int size = 0;
 
       for (SongEntry e : originalStore.getListOfSongs())
       {
          TunesSubSet subSet = new TunesSubSet(originalStore);
-         int size = Col.size();
+         Col.size();
          for (int i= 0; i <= size; i++)
          {
             if (Col.get(i).subSetDuration + e.getDuration() <= duration)
-            {
+            {            
                try
                {
+                  System.out.println("DURATION = " + duration);
+                  System.out.println("e.getDuration " + e.getDuration());
+                  System.out.println("Col.get(i).subSetDuration" + Col.get(i).subSetDuration);
                   subSet = (TunesSubSet) makeSubSet(Col.get(i), e);
                   System.out.println("subset.subSetDuration = " + subSet.subSetDuration);
                  subSet.printTunesSubSet();
@@ -75,14 +79,16 @@ public class TunesSubSet
                   e1.printStackTrace();
                }
                Col.add(subSet);
+              
+               System.out.println("Col.size()" + Col.size());
                maxSubSet = subSet;
             }
             if (Col.get(i).subSetDuration + e.getDuration() == duration)
-            {
+     
                System.out.println("subset found");
                return subSet;
             }
-         }
+         
       }
       return maxSubSet;
    }
