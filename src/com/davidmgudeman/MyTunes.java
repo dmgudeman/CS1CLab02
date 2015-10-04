@@ -1,8 +1,6 @@
 package com.davidmgudeman;
 
 /**
-
-
  * Creates an object of type FoothillTunesStore which parses a data file
  * in JSON format. Reads an input file that contains users selected actions.
  * Prints out a menu with available actions we can take.
@@ -10,21 +8,7 @@ package com.davidmgudeman;
  *  adding new songs in our tunes library, making a playlist of a certain
  *  duration, etc. Outputs the estimated run time of "findSubset" method.
  *
- * @author Foothill College, [YOUR NAME HERE]
- *
- * REMINDER: Include text cases in addition to those provided.
- *
- *
- * NOTE: Due to a few data points in the json file, such as:
- * ,
- {
- "genre": "classic pop and rock",
- "artist_name": "Crosby_ Stills_ Nash and Young",
- "title": "Carry On",
- "duration": "0.80934"
- },
- * Modify the constructor for class MillionSongDataSubset to save "duration" as follows:
- int duration = (int)Math.ceil(Double.parseDouble(currentJson.get("duration").toString()));
+ * @author Foothill College, David Gudeman
  *
  */
 
@@ -42,15 +26,23 @@ import cs1c.TimeConverter;
 public class MyTunes
 {
 
-   private ArrayList<SongEntry> purchasedTunes;  
+   private ArrayList<SongEntry> purchasedTunes;
    private static String jsonFileName = "music_genre_subset.json";
    static Scanner keyboard = new Scanner(System.in);
 
-   public MyTunes(FoothillTunesStore store)
+   /**
+    * zero constructor
+    * 
+    */
+   public MyTunes()
    {
-
    }
 
+   /**
+    * standard I/O to capture the menu driven input from the user.
+    * 
+    * @param choice
+    */
    public static void choosing(int choice)
    {
       long startTime, estimatedTime = 0;

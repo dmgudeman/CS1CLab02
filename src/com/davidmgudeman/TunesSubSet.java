@@ -1,5 +1,11 @@
 package com.davidmgudeman;
 
+/**
+ * Class was designed to facilitate managing items such as total duration of 
+ * subsets so as not to have to compute this every time. The objects carry a 
+ * complete list of tunes from the store as well as duration of the subset and 
+ * number of elements in the subset.
+ */
 import java.util.ArrayList;
 
 import cs1c.SongEntry;
@@ -12,6 +18,11 @@ public class TunesSubSet
    ArrayList<SongEntry> currentSubSet = null;
    int subSetSize = 0;
 
+   /**
+    * Constructs a Subset containing an ArrayList of SongEntry.
+    * 
+    * @param originalStore
+    */
    public TunesSubSet(FoothillTunesStore originalStore)
    {
       super();
@@ -20,9 +31,15 @@ public class TunesSubSet
       currentSubSet = new ArrayList<>();
       subSetDuration = 0;
       subSetSize = 0;
-
    }
 
+   /**
+    * I had a lot of duplicates so I put this work around in.
+    * 
+    * @param list
+    * @param song
+    * @return
+    */
    public boolean avoidDuplicates(ArrayList<SongEntry> list, SongEntry song)
    {
       if (list.contains(song))
@@ -31,8 +48,16 @@ public class TunesSubSet
       }
       return false;
    }
-   
 
+   /**
+    * Takes a TunesSubSet and a new SongEntry. It makes a copy of the
+    * TunesSubSet and adds the SongEntry to it to make the augmented subset.
+    * 
+    * @param originalTunesSubSet
+    * @param newSong
+    * @return
+    * @throws CloneNotSupportedException
+    */
    public TunesSubSet makeSubSet(TunesSubSet originalTunesSubSet,
          SongEntry newSong) throws CloneNotSupportedException
    {
@@ -42,12 +67,12 @@ public class TunesSubSet
       {
          SongEntry as = s;
          newTunesSubSet.currentSubSet.add(as);
-         
+
       }
-     
+
       newTunesSubSet.subSetDuration = originalTunesSubSet.subSetDuration
             + newSong.getDuration();
-  
+
       newTunesSubSet.subSetSize = originalTunesSubSet.subSetSize + 1;
       newTunesSubSet.currentSubSet.add(newSong);
 
@@ -55,11 +80,22 @@ public class TunesSubSet
 
    }
 
+   /**
+    * returns the subsetDuration
+    */
    public double getSubSetDuration()
    {
       return this.subSetDuration;
    }
 
+   /**
+    * This is the workhorse class to find the subset with the closest duration
+    * desired by the user. The desired duration is put in throught the menu and
+    * console.
+    * 
+    * @param duration
+    * @return
+    */
    public TunesSubSet findSubSet(int duration)
    {
       Boolean foundSubSet = false;
@@ -70,13 +106,13 @@ public class TunesSubSet
 
       TunesSubSet subSet = new TunesSubSet(originalStore);
 
-   for (SongEntry e : originalStore.tunes)
+      for (SongEntry e : originalStore.tunes)
       {
          for (int i = 0; i < Col.size(); i++)
-            {
+         {
             if (foundSubSet == false)
             {
-    
+
                Col.get(i);
 
                if (Col.get(i).subSetDuration + e.getDuration() <= duration
@@ -85,7 +121,7 @@ public class TunesSubSet
                   try
                   {
                      subSet = (TunesSubSet) makeSubSet(Col.get(i), e);
-                    
+
                   } catch (CloneNotSupportedException e1)
                   {
                      System.out
@@ -93,23 +129,19 @@ public class TunesSubSet
                      e1.printStackTrace();
                   }
                   Col.add(subSet);
-                  if (subSet.subSetDuration> maxSubSet.subSetDuration && subSet.subSetDuration < duration)
-                  maxSubSet = subSet;
-               }
-               else if (Col.get(i).subSetDuration + e.getDuration() == duration)
+                  if (subSet.subSetDuration > maxSubSet.subSetDuration
+                        && subSet.subSetDuration < duration)
+                     maxSubSet = subSet;
+               } else if (Col.get(i).subSetDuration + e.getDuration() == duration)
                {
-                //  System.out.println("SUBSET FOUND");              
-               ////   System.out.println("SUBSET DURATION =" + Col.get(i).subSetDuration + e.getDuration());
-               //   System.out.println("NNNEWW SONNG" + e.getDuration());
-              //    System.out.println("DDDDDDDUUUUURRRRRRAAAAATTTTION" + Col.get(i).subSetDuration);
+
                   subSet.subSetDuration = Col.get(i).subSetDuration
                         + e.getDuration();
-                  
-              //    System.out.println("VVVVVVVVVVVVVVVV = "+ subSet.subSetDuration);
+
                   foundSubSet = true;
                   printTunesSubSet(subSet);
                   return subSet;
-               }            
+               }
             }
          }
 
@@ -117,10 +149,17 @@ public class TunesSubSet
       return maxSubSet;
    }
 
+   /**
+    * helper class to print out a TunesSubSet object.
+    * 
+    * @param tunesSubSet
+    */
    public void printTunesSubSet(TunesSubSet tunesSubSet)
-   {  System.out.println("subset Duration " + (tunesSubSet.subSetDuration/60) + " minutes.");
+   {
+      System.out.println("subset Duration " + (tunesSubSet.subSetDuration / 60)
+            + " minutes.");
       System.out.println("subset Size " + tunesSubSet.subSetSize);
-    
+
       try
       {
          for (SongEntry s : tunesSubSet.currentSubSet)
@@ -132,6 +171,11 @@ public class TunesSubSet
       }
    }
 
+   /**
+    * getter for subset size.
+    * 
+    * @return
+    */
    public int getSize()
    {
       return subSetSize;

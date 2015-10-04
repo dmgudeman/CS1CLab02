@@ -1,5 +1,10 @@
 package com.davidmgudeman;
 
+/**
+ * This contains the Main for Part 1 of the assignment. This class takes in a 
+ * text file that provides the grocery list which is the superset from 
+ * which the subsets are to be taken.
+ */
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,7 +16,6 @@ import java.util.regex.Pattern;
 
 import cs1c.TimeConverter;
 
-
 public class ShoppingBag
 {
    Boolean foundSubSet = false;
@@ -19,10 +23,10 @@ public class ShoppingBag
    int cashOnHand;
    ArrayList<Integer> groceryList;
    ArrayList<ArrayList<Integer>> Col;
-   
+
    public static void main(String[] args) throws FileNotFoundException
    {
-      final String FILENAME = "resources/groceries.txt"; 
+      final String FILENAME = "resources/groceries.txt";
 
       ShoppingBag bag = new ShoppingBag(FILENAME);
       ArrayList<Integer> shoppingList = bag.getPriceOfGroceries();
@@ -42,7 +46,7 @@ public class ShoppingBag
       // output the result
       System.out.println("Purchased grocery prices are:");
       bag.findSubset(budget);
-      
+
       // stop and calculate elapsed time
       estimatedTime = System.nanoTime() - startTime;
 
@@ -52,15 +56,25 @@ public class ShoppingBag
             + " seconds.\n");
    }
 
+   /**
+    * contstructor the takes in the text filename as a String.
+    * 
+    * @param fILENAME
+    */
    public ShoppingBag(String fILENAME)
    {
       super();
       FILENAME = fILENAME;
    }
 
+   /**
+    * Creates an ArrayList of Integers that represents the superset, grocery 
+    * list for the assignment.
+    * @return
+    * @throws FileNotFoundException
+    */
    public ArrayList<Integer> getPriceOfGroceries() throws FileNotFoundException
    {
-
       String filename = this.FILENAME;
       BufferedReader inFile = new BufferedReader(new FileReader(filename));
 
@@ -89,13 +103,18 @@ public class ShoppingBag
       return groceryList;
    }
 
+   /**
+    * main method to find the closest subset to the alloted amount of money 
+    * (budget) which is obtained from the user by way of the console.
+    * @param budget
+    */
    public void findSubset(int budget)
    {
       int maxSize = 0;
       Col = new ArrayList<>();
       ArrayList<Integer> emptySet = new ArrayList<>();
       ArrayList<Integer> maxSubSet = null;
-    
+
       Col.add(emptySet);
       for (Integer item : groceryList)
       {
@@ -112,7 +131,7 @@ public class ShoppingBag
                {
                   if (newSubSetSize > maxSize)
                      maxSize = newSubSetSize;
-                     maxSubSet = newSubSet;
+                  maxSubSet = newSubSet;
                   Col.add(newSubSet);
                }
                if (newSubSetSize == budget)
@@ -123,13 +142,18 @@ public class ShoppingBag
                }
             }
          }
-        
+
       }
       if (foundSubSet == false)
-      printSubSet(maxSubSet);
-      
+         printSubSet(maxSubSet);
+
    }
 
+   /**
+    * helper class to sum an Integer ArrayList.
+    * @param listToSum
+    * @return
+    */
    public Integer listSummation(ArrayList<Integer> listToSum)
    {
       Integer sum = 0;
@@ -140,6 +164,10 @@ public class ShoppingBag
       return sum;
    }
 
+   /**
+    * helper class to print out ArrayList of Integers.
+    * @param subSet
+    */
    public void printSubSet(ArrayList<Integer> subSet)
    {
       System.out.print("[ ");
@@ -150,6 +178,11 @@ public class ShoppingBag
       System.out.println("] sum = " + listSummation(subSet));
    }
 
+   /**
+    * Prints out the entire set of subsets. The superset is an ArrayList of 
+    * ArrayLists of Integers.
+    * @param Col
+    */
    public void printCol(ArrayList<ArrayList<Integer>> Col)
    {
       for (ArrayList<Integer> I : Col)

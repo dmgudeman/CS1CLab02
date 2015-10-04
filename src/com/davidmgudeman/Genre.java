@@ -4,11 +4,16 @@ import java.util.ArrayList;
 
 import cs1c.SongEntry;
 
+/**
+ * Class allows the user to access the song list by genre. Separate ArrayLists
+ * are constructed to make quicker searching availble it that were to be
+ * implemented.
+ * 
+ * @author davidgudeman
+ *
+ */
 public class Genre
 {
-   // public enum genre {soul_and_reggae, classic_pop_and_rock,
-   // dance_and_electronica, folk, punk, metal, jazz_and_blues}
-
    public int index = 0;
 
    ArrayList<SongEntry> classical = new ArrayList<>();
@@ -20,17 +25,19 @@ public class Genre
    ArrayList<SongEntry> metal = new ArrayList<>();
    ArrayList<SongEntry> jazz = new ArrayList<>();
 
+   /**
+    * Extracts a list of the songs from a FoothillTunesStore object and
+    * separates them into separate genres.
+    * 
+    * @param store
+    */
    public Genre(FoothillTunesStore store)
    {
-
       ArrayList<SongEntry> tunes = store.tunes;
-
       for (SongEntry s : tunes)
       {
-
          if (s.getGenre().equals("classical"))
          {
-
             classical.add(s);
          } else if (s.getGenre().equals("classic pop and rock"))
          {
@@ -54,6 +61,11 @@ public class Genre
       }
    }
 
+   /**
+    * Prints out the arraylists by taking in one of the genre lists
+    * 
+    * @param list
+    */
    public void printArrayListTunes(ArrayList<SongEntry> list)
    {
       int counter = 1;
@@ -66,6 +78,9 @@ public class Genre
       System.out.println("The list has " + counter + " elements.");
    }
 
+   /**
+    * prints out all the genres
+    */
    public void printByGenre()
    {
       System.out.println("CLASSICAL:_________________________________");
