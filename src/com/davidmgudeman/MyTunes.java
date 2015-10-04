@@ -96,7 +96,8 @@ public class MyTunes
          Scanner s2 = new Scanner(System.in);
          Integer playListLength = Integer.parseInt(s2.nextLine());
          System.out.println("This what you input " + playListLength + " minutes."); 
-         subSet.findSubSet(playListLength);
+         int playMilli = playListLength * 1000;
+         subSet.findSubSet(playMilli);
          subSet.printTunesSubSet();
          s2.close();
          System.out.println("Creating playlist");

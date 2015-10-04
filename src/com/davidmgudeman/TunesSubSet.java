@@ -23,21 +23,25 @@ public class TunesSubSet
 
    }
 
-   public Object makeSubSet(TunesSubSet originalSubSet, SongEntry newSong)
+   public TunesSubSet makeSubSet(TunesSubSet originalTunesSubSet, SongEntry newSong)
          throws CloneNotSupportedException
    {
-      TunesSubSet newSubSet = new TunesSubSet(originalStore);
-      ArrayList<SongEntry> oldSongEntryList = new ArrayList<>();
-      oldSongEntryList = originalSubSet.currentSubSet;
-      newSubSet.subSetDuration = originalSubSet.subSetDuration
+      TunesSubSet newTunesSubSet = new TunesSubSet(originalStore);
+      for(SongEntry s: originalTunesSubSet.currentSubSet)
+      {
+         SongEntry as =  s;
+         newTunesSubSet.currentSubSet.add(as);     
+      }      
+      newTunesSubSet.subSetDuration = originalTunesSubSet.subSetDuration
             + newSong.getDuration();
-      oldSongEntryList.add(newSong);
-      int subSetSize = oldSongEntryList.size();
-      newSubSet.currentSubSet = originalSubSet.currentSubSet;
-      newSubSet.currentSubSet.add(newSong);
-      newSubSet.subSetSize = originalSubSet.subSetSize + 1;
+      
+      newTunesSubSet.subSetSize = originalTunesSubSet.subSetSize +1 ;
+      newTunesSubSet.currentSubSet.add(newSong);
+    //  newSubSet.currentSubSet.add(newSong);
+      System.out.println(newTunesSubSet.subSetSize);
+     newTunesSubSet.printTunesSubSet();
 
-      return newSubSet;
+      return newTunesSubSet;
    }
 
    public int getSubSetDuration()
@@ -56,7 +60,7 @@ public class TunesSubSet
       {
          TunesSubSet subSet = new TunesSubSet(originalStore);
          int size = Col.size();
-         for (int i= 0; i < size; i++)
+         for (int i= 0; i <= size; i++)
          {
             if (Col.get(i).subSetDuration + e.getDuration() <= duration)
             {
@@ -64,6 +68,7 @@ public class TunesSubSet
                {
                   subSet = (TunesSubSet) makeSubSet(Col.get(i), e);
                   System.out.println("subset.subSetDuration = " + subSet.subSetDuration);
+                 subSet.printTunesSubSet();
                } catch (CloneNotSupportedException e1)
                {
                   System.out.println("Clone didn;t happen findSubSet method");
@@ -84,10 +89,12 @@ public class TunesSubSet
 
    public void printTunesSubSet()
    {
+      System.out.println("subset Size" + this.subSetSize);
+      System.out.println("subset Duration" + this.subSetDuration);
       try
       {
          for (SongEntry s : currentSubSet)
-
+            
             System.out.println(s.toString());
       } catch (NullPointerException e)
       {
