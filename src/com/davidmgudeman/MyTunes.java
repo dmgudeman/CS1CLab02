@@ -68,7 +68,7 @@ public class MyTunes
       long startTime, estimatedTime = 0;
       
       FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
-      Genre genre = new Genre(tunes);
+     
       switch(choice) 
       {
       case 0 :
@@ -85,7 +85,8 @@ public class MyTunes
          break;
       case 3:
          System.out.println("Songs by genre");
-         startTime = System.nanoTime(); 
+         startTime = System.nanoTime();
+         Genre genre = new Genre(tunes);
          genre.printByGenre();
          estimatedTime = System.nanoTime() - startTime;
          break;
@@ -106,6 +107,7 @@ public class MyTunes
          Integer playListLength = Integer.parseInt(s2.nextLine());
          System.out.println("This what you input " + playListLength + " minutes."); 
          int playMilli = playListLength * 60;
+         System.out.println("bbbb" + playMilli);
          startTime = System.nanoTime(); 
          subSet.findSubSet(playMilli);
        //  subSet.printTunesSubSet(subSet);
@@ -139,7 +141,7 @@ public class MyTunes
       System.out.println("0. Quit");
       System.out.println("1. Output this menu");
       System.out.println("2. Show all song titles");
-      System.out.println("3. Show all songs by genre ");
+      System.out.println("3. Show songs by genre ");
       System.out.println("4. Buy songs by title");
       System.out.println("5. Create a playlist");
       System.out.println("");
@@ -154,8 +156,6 @@ public class MyTunes
       printMenu();
     
         FoothillTunesStore tunes = new FoothillTunesStore(jsonFileName);
-      //   tunes.printArrayListTunes();
-     //    Genre genre = new Genre(tunes);
      
          {
             Pattern intsOnly = Pattern
@@ -168,41 +168,6 @@ public class MyTunes
             choosing(choice);
          }
          
-         TunesSubSet test = new TunesSubSet(tunes);
-      //1
-         
-
-/*
-         // display unsorted array of songs
-         System.out.println("Completed parsing JSON file.");
-         if (ENABLE_DATA_OUTPUT)
-            dataSet.printAllSongs();
-            System.out.println("allSongs size: " + allSongs.size());
-
-         // --------------------
-         // use to measure the run time
-   //      long startTime, estimatedTime;
-
-  //       System.out.println("Sorting array of " + dataSet.getArrayOfSongs().length + " songs via BubbleSort...");
-
-         // measuring run time of an example algorithm
- //        startTime = System.nanoTime();    
-
-         // sort
- //        SongEntry.setSortType(SongEntry.SORT_BY_DURATION);
- //        BubbleSort.sortArray(dataSet.getArrayOfSongs());
-
-  //       estimatedTime = System.nanoTime() - startTime;
-
-         // display the sorted list
-         if (!ENABLE_DATA_OUTPUT)
-            dataSet.printAllSongs();
-
-         // report algorithm time
-  //       System.out.println("\nAlgorithm Elapsed Time: "
-  //             + TimeConverter.convertTimeToString(estimatedTime) + ", "
-  //             + " seconds.\n");
-
-  */
+        
    }
 }

@@ -17,7 +17,7 @@ public class FoothillTunesStore
 {
    private static final boolean ENABLE_DATA_OUTPUT = false;
 
-   private ArrayList<SongEntry> tunes;
+   ArrayList<SongEntry> tunes;
    private ArrayList<Genre> genres;
    private SongEntry[] arrayOfSongs;
    private JSONArray allSongs;
@@ -32,7 +32,7 @@ public class FoothillTunesStore
 
    public FoothillTunesStore(String jsonFileName)
    {
-
+      ArrayList<SongEntry> songEntryList = new ArrayList<>();
       String jsonFilePath = "resources/" + jsonFileName;
       JSONParser jsonParser = new JSONParser();
 
@@ -67,6 +67,7 @@ public class FoothillTunesStore
             tunes.add(currentSong);
             arrayOfSongs[counter++] = currentSong;
          }
+         makeListOfSongs(arrayOfSongs, songEntryList);
       } catch (FileNotFoundException e)
       {
          e.printStackTrace();
@@ -82,10 +83,12 @@ public class FoothillTunesStore
    /**
     * returns the array of song entries
     */
-   public ArrayList<SongEntry> getListOfSongs()
+   public void makeListOfSongs(SongEntry[] entries, ArrayList<SongEntry> songEntryList)
    {
-      ArrayList<SongEntry> list = this.tunes;
-      return list;
+      for (int i = 0; i < entries.length; i++ )
+      {
+         songEntryList.add(entries[i]);
+      }
    }
 
    /**

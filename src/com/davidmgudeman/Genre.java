@@ -24,7 +24,7 @@ public class Genre
    public Genre(FoothillTunesStore store)
    {
       
-      ArrayList<SongEntry> tunes = store.getListOfSongs();
+      ArrayList<SongEntry> tunes = store.tunes;
       
       for (SongEntry s : tunes)
       { 

@@ -7,8 +7,8 @@ import cs1c.SongEntry;
 public class TunesSubSet
 {
    static FoothillTunesStore originalStore;
-   ArrayList<SongEntry> tunesList;
-   private Integer subSetDuration = 0;
+   ArrayList<SongEntry> songEntryList;
+   private int subSetDuration = 0;
    ArrayList<SongEntry> currentSubSet = null;
    int subSetSize = 0;
 
@@ -16,7 +16,7 @@ public class TunesSubSet
    {
       super();
       this.originalStore = originalStore;
-      tunesList = originalStore.getListOfSongs();
+      songEntryList = originalStore.tunes;
       currentSubSet = new ArrayList<>();
       subSetDuration = 0;
       subSetSize = 0;
@@ -31,6 +31,7 @@ public class TunesSubSet
       }
       return false;
    }
+   
 
    public TunesSubSet makeSubSet(TunesSubSet originalTunesSubSet,
          SongEntry newSong) throws CloneNotSupportedException
@@ -41,21 +42,24 @@ public class TunesSubSet
       {
          SongEntry as = s;
          newTunesSubSet.currentSubSet.add(as);
+         
       }
+      System.out.println("NNNEWW SONNG" + newSong.getDuration());
+      System.out.println("DDDDDDDUUUUURRRRRRAAAAATTTTION" + originalTunesSubSet.subSetDuration);
       newTunesSubSet.subSetDuration = originalTunesSubSet.subSetDuration
             + newSong.getDuration();
+      
+      System.out.println("VVVVVVVVVVVVVVVV = "+ newTunesSubSet.subSetDuration);
+      
 
       newTunesSubSet.subSetSize = originalTunesSubSet.subSetSize + 1;
       newTunesSubSet.currentSubSet.add(newSong);
-      // newSubSet.currentSubSet.add(newSong);
-      System.out.println("INNNNNNN   TUNNESSUBSEETTT   "
-            + newTunesSubSet.subSetSize);
 
       return newTunesSubSet;
 
    }
 
-   public int getSubSetDuration()
+   public double getSubSetDuration()
    {
       return this.subSetDuration;
    }
@@ -70,14 +74,13 @@ public class TunesSubSet
 
       TunesSubSet subSet = new TunesSubSet(originalStore);
 
-      for (SongEntry e : emptySubSet.tunesList)
+   for (SongEntry e : originalStore.tunes)
       {
-
-         if (foundSubSet == false)
-         {
-            for (int i = 0; i < Col.size(); i++)
+         for (int i = 0; i < Col.size(); i++)
             {
-               System.out.println(" i " + i + "; Col.size(): " + Col.size());
+            if (foundSubSet == false)
+            {
+    
                Col.get(i);
 
                if (Col.get(i).subSetDuration + e.getDuration() <= duration
@@ -86,7 +89,7 @@ public class TunesSubSet
                   try
                   {
                      subSet = (TunesSubSet) makeSubSet(Col.get(i), e);
-                     subSet.printTunesSubSet(subSet);
+                    
                   } catch (CloneNotSupportedException e1)
                   {
                      System.out
@@ -94,17 +97,23 @@ public class TunesSubSet
                      e1.printStackTrace();
                   }
                   Col.add(subSet);
-                  System.out.println("Col.size()" + Col.size());
+                  if (subSet.subSetDuration> maxSubSet.subSetDuration && subSet.subSetDuration < duration)
                   maxSubSet = subSet;
                }
-               if (Col.get(i).subSetDuration + e.getDuration() == duration)
+               else if (Col.get(i).subSetDuration + e.getDuration() == duration)
                {
-                  System.out.println("subset found");
+                  System.out.println("SUBSET FOUND");              
+                  System.out.println("SUBSET DURATION =" + Col.get(i).subSetDuration + e.getDuration());
+                  System.out.println("NNNEWW SONNG" + e.getDuration());
+                  System.out.println("DDDDDDDUUUUURRRRRRAAAAATTTTION" + Col.get(i).subSetDuration);
+                  subSet.subSetDuration = Col.get(i).subSetDuration
+                        + e.getDuration();
+                  
+                  System.out.println("VVVVVVVVVVVVVVVV = "+ subSet.subSetDuration);
                   foundSubSet = true;
                   printTunesSubSet(subSet);
                   return subSet;
-               }
-               size = Col.size();
+               }            
             }
          }
 
@@ -115,7 +124,7 @@ public class TunesSubSet
    public void printTunesSubSet(TunesSubSet tunesSubSet)
    {
       System.out.println("subset Size" + tunesSubSet.subSetSize);
-      System.out.println("subset Duration" + tunesSubSet.subSetDuration);
+    
       try
       {
          for (SongEntry s : tunesSubSet.currentSubSet)

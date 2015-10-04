@@ -29,5 +29,21 @@ Purchased grocery prices are:
 Algorithm Elapsed Time: 0 hrs : 0 mins : 0 sec : 3 ms : 994638 ns : ,  seconds.
 ------------------------------------
 
+Part 2:
 
+choices 2 and 3 work but they are too big to copy here;
+I only had time to put the filter in for classical in choice 3 but putting the 
+other genre filters in will be easy.
+
+4
+THIS IS YOUR CHOICE 4
+Parsing JSON file...
+Buying song entitled:
+Blue Jay
+This what you input Blue Jay
+Number of found songs: 2
+Blue Jay, 0:3:43, Steve Lacy, jazz and blues
+Blue Jay, 0:3:43, Steve Lacy, jazz and blues
+
+Algorithm Elapsed Time: 0 hrs : 0 mins : 0 sec : 14 ms : 983434 ns : ,  seconds.
 
